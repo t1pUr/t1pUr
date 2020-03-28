@@ -1,0 +1,161 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace exercise1_4
+{
+    class Figure
+    {
+        private int count = 0;
+        private double perimeter = 0;
+        private double side1, side2, side3, side4, side5;
+        public Figure(Point point, Point point2, Point point3)
+        {
+            count = 3;
+
+            side1 = LengthSide(point, point2);
+            side2 = LengthSide(point2, point3);
+            side3 = LengthSide(point, point3);
+        }
+
+        public Figure(Point point, Point point2, Point point3, Point point4)
+        {
+            count = 4;
+
+            side1 = LengthSide(point, point2);
+            side2 = LengthSide(point2, point3);
+            side3 = LengthSide(point3, point4);
+            side4 = LengthSide(point, point4);
+        }
+
+        public Figure(Point point, Point point2, Point point3, Point point4, Point point5)
+        {
+            count = 5;
+
+            side1 = LengthSide(point, point2);
+            side2 = LengthSide(point2, point3);
+            side3 = LengthSide(point3, point4);
+            side4 = LengthSide(point4, point5);
+            side5 = LengthSide(point5, point);
+        }
+
+        public double LengthSide(Point A, Point B)
+        {
+            double side = Math.Sqrt(Math.Pow((A.Field1 - B.Field1), 2) + Math.Pow((A.Field2 - B.Field2), 2));
+            return side;
+        }
+        public void PerimeterCalculator()
+        {
+            if (count == 3)
+            {
+                perimeter = side1 + side2 + side3;
+                Console.WriteLine("Периметр треугольника: " + perimeter);
+            }
+
+            if (count == 4)
+            {
+                perimeter = side1 + side2 + side3 + side4;
+                Console.WriteLine("Периметр четырехугольика: " + perimeter);
+            }
+
+            if (count == 5)
+            {
+                perimeter = side1 + side2 + side3 + side4 + side5;
+                Console.WriteLine("Периметр пятиугольника: " + perimeter);
+            }
+        }
+
+    }
+}
+
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace exercise1_4
+{
+    class Point
+    {
+        private int field1;
+        private int field2;
+        private string namePoint;
+
+        
+
+        public int Field1
+        {
+            get { return field1; }
+        }
+        public int Field2
+        {
+            get { return field2; }
+        }
+        public string NamePoint
+        {
+            get { return namePoint; }
+        }
+
+        public Point(int field1, int field2, string namePoint)
+        {
+            
+            this.field1 = field1;
+            this.field2 = field2;
+            this.namePoint = namePoint;
+            
+            Console.WriteLine($"Координаты точки {namePoint} - ({field1}, {field2})");
+            
+        }
+
+    }
+}
+
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace exercise1_4
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Point point = new Point(4, 5, "Точка А");
+            Point point2 = new Point(0, 0, "Точка В");
+            Point point3 = new Point(4, 0, "Точка С");
+
+            Figure triangle = new Figure(point, point2, point3);  //треугольник
+            triangle.PerimeterCalculator();
+
+            Console.WriteLine(new string('_', 100));
+
+            Point point1_1 = new Point(10, 20, "Точка А");
+            Point point1_2 = new Point(10, -10, "Точка B");
+            Point point1_3 = new Point(-5, -10, "Точка C");
+            Point point1_4 = new Point(-5, 20, "Точка D");
+
+            Figure quadrangle = new Figure(point1_1, point1_2, point1_3, point1_4);   //четырехугольник
+            quadrangle.PerimeterCalculator();
+
+            Console.WriteLine(new string('_', 100));        
+
+            Point point1_1_1 = new Point(4, 6, "Точка А");
+            Point point1_1_2 = new Point(10, 56, "Точка B");
+            Point point1_1_3 = new Point(-40, 80, "Точка C");
+            Point point1_1_4 = new Point(9, 0, "Точка D");
+            Point point1_1_5 = new Point(-37, -20, "Точка E");
+
+            Figure pentagon = new Figure(point1_1_1, point1_1_2, point1_1_3, point1_1_4, point1_1_5);   //пятиугольник
+            pentagon.PerimeterCalculator();
+
+            Console.ReadKey();
+        }
+    }
+}
